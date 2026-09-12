@@ -1,0 +1,99 @@
+// Point Netlist Generated on: Sep 12 01:03:25 2026
+// Generated for: spectre
+// Design Netlist Generated on: Sep 12 01:03:23 2026
+// Design library name: MLQP
+// Design cell name: ideal
+// Design view name: schematic
+simulator lang=spectre
+global 0
+parameters Pout=10 Vout=1 Iout=20 mul=20 cfly=40u
+include "/data/PDK/CV018G_BCD_Gen2/PDK/t180bcd_1p0fF_30K/tsmc18/../models/spectre/c018bcd_gen2_v1d6_usage.scs" section=pre_simu
+include "/data/PDK/CV018G_BCD_Gen2/PDK/t180bcd_1p0fF_30K/tsmc18/../models/spectre/c018bcd_gen2_v1d6_usage.scs" section=tt_lib
+include "/home01/xujx/work_180bcd/bodyD_LLC.scs"
+
+// Library name: zhs_controller
+// Cell name: Diode_ideal
+// View name: schematic
+subckt Diode_ideal IN OUT
+    W0 (IN OUT IN OUT) relay vt1=0 vt2=600.0m ropen=1M rclosed=20m
+ends Diode_ideal
+// End of subcircuit definition.
+
+// Library name: MLQP
+// Cell name: ideal
+// View name: schematic
+W42 (vsw4 gnd s4 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=490.00u
+W41 (net011 gnd s2 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=490.00u
+W27 (net012 net011 s1 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=490.00u
+W30 (vx1 gnd s2 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=490.00u
+W31 (net023 net022 s4 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=490.00u
+W32 (net043 gnd s4 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=490.00u
+W28 (net023 vsw4 s3 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=490.00u
+W29 (net012 net022 s2 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=490.00u
+W23 (vin vsw1 s1 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=3.3m
+W25 (vsw2 vsw3 s1 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=3.3m
+W24 (vsw1 vsw2 s3 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=3.3m
+W26 (vsw3 vsw4 s3 gnd) relay vt1=400m vt2=4.8 ropen=1T rclosed=3.3m
+V1 (vin gnd) vsource dc=48 type=dc
+V0 (gnd 0) vsource dc=0 type=dc
+C21 (net023 net022) capacitor c=2.26n
+C14 (vin vsw1) capacitor c=350p
+C16 (vsw2 vsw3) capacitor c=350p
+C15 (vsw1 vsw2) capacitor c=350p
+C27 (vsw4 net023) capacitor c=2.26n
+C23 (net012 net022) capacitor c=2.26n
+C20 (net043 gnd) capacitor c=2.26n
+C19 (vsw4 gnd) capacitor c=2.26n
+C25 (net011 net012) capacitor c=2.26n
+C22 (vx1 gnd) capacitor c=2.26n
+C17 (vsw3 vsw4) capacitor c=350p
+C8 (net022 gnd) capacitor c=100u ic=0
+C4 (net029 net043) capacitor c=cfly ic=0
+C5 (net030 vx1) capacitor c=cfly ic=0
+C18 (net011 gnd) capacitor c=2.26n
+C2 (vsw3 net011) capacitor c=3u ic=0
+C1 (vsw2 vsw4) capacitor c=3u ic=0
+C0 (vsw1 net011) capacitor c=3u ic=0
+L1 (net022 net038) inductor l=80n
+L0 (net022 net037) inductor l=80n
+I24 (s1 s2 s3 s4) MLQP_clk_gen_regulated vhi=5 vlo=0 tperiod=1u tdelay=0 \
+        phase_deg=180 ton1=Vout/(12-Vout)*1e-6 tdead1=20n \
+        ton2=Vout/(12-Vout)*1e-6 tdead2=20n trise=1e-10 tfall=1e-10 \
+        t_eps=1e-15
+R5 (net023 net029) resistor r=1m
+R4 (net012 net030) resistor r=1m
+R9 (net037 net043) resistor r=700.0u
+R0 (net022 gnd) resistor r=Vout*Vout/Pout
+R8 (net038 vx1) resistor r=700.0u
+I20 (net022 net012) Diode_ideal
+I18 (gnd net043) Diode_ideal
+I9 (vsw2 vsw1) Diode_ideal
+I26 (net011 net012) Diode_ideal
+I17 (net022 net023) Diode_ideal
+I16 (gnd vx1) Diode_ideal
+I13 (gnd vsw4) Diode_ideal
+I12 (gnd net011) Diode_ideal
+I10 (vsw3 vsw2) Diode_ideal
+I19 (vsw1 vin) Diode_ideal
+I11 (vsw4 vsw3) Diode_ideal
+I25 (vsw4 net023) Diode_ideal
+simulatorOptions options psfversion="1.4.0" reltol=1e-3 vabstol=1e-6 \
+    iabstol=1e-12 temp=27 tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 \
+    maxnotes=5 maxwarns=5 digits=5 cols=80 pivrel=1e-3 \
+    sensfile="../psf/sens.output" checklimitdest=psf \
+    max_consecutive_minstep=500 max_minstep_nonconv=500 \
+    max_approach_minstep=600 
+tran tran stop=1m errpreset=conservative cmin=1f write="spectre.ic" \
+    writefinal="spectre.fc" annotate=status maxiters=5 
+finalTimeOP info what=oppoint where=rawfile
+modelParameter info what=models where=rawfile
+element info what=inst where=rawfile
+outputParameter info what=output where=rawfile
+designParamVals info what=parameters where=rawfile
+primitives info what=primitives where=rawfile
+subckts info what=subckts where=rawfile
+save L1:1 L0:1 net012 V1:p R0:1 W23:1 W24:1 W25:1 W26:1 W27:1 W28:1 W31:1 \
+    W32:1 W29:1 W30:1 W30:1 W30:1 W30:1 W41:1 W42:1 
+save R0.1 ports=yes
+saveOptions options save=allpub
+ahdl_include "/home01/xujx/work_180bcd_0219/MLQP/MLQP_clk_gen_regulated/veriloga/veriloga.va"
